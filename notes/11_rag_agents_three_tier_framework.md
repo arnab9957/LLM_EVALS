@@ -13,6 +13,13 @@
 
 ## 2. The Three-Tier Evaluation Framework
 
+```mermaid
+flowchart TB
+    C[1. Component<br/>retriever, generator, tools] --> P[2. Pipeline<br/>RAG triad, tool sequence]
+    P --> A[3. Application<br/>correctness, UX, safety]
+    A -. failure? drill down .-> C
+```
+
 | Level | Main question | What to test | Example metrics |
 |---|---|---|---|
 | **1. Component** | Does each part work on its own? | Retriever, generator, reranker, tool, parser | Contextual precision/recall/relevancy; faithfulness; tool-call accuracy; schema validity |
@@ -66,6 +73,13 @@ Also inspect retrieval Recall@K, duplicate chunks, source quality, and retrieval
 ## 5. Level 2 — Pipeline Evaluation and the RAG Triad
 
 The commonly used **RAG triad** consists of:
+
+```mermaid
+flowchart LR
+    Q[Query] -- Context relevance --> C[Retrieved context]
+    C -- Faithfulness --> A[Answer]
+    A -- Answer relevance --> Q
+```
 
 1. **Contextual relevancy:** Is the retrieved context relevant to the input?
 2. **Faithfulness:** Is the answer supported by the retrieved context?
@@ -149,6 +163,15 @@ Select metrics based on the actual task and failure risks; do not apply every me
 
 **Regression testing** checks that a code, prompt, model, retriever, embedding, or configuration change has not broken previously working behavior.
 
+```mermaid
+flowchart LR
+    PR[Code / prompt change] --> CI[CI runs golden dataset]
+    CI --> CMP[Compare vs baseline]
+    CMP --> G{Gates pass?}
+    G -->|Yes| M[Merge and deploy]
+    G -->|No| F[Block and review failures]
+```
+
 1. Build a versioned **golden dataset** of representative questions and expected behavior.
 2. Run it against the current production baseline.
 3. Run the same tests against the proposed change.
@@ -174,6 +197,12 @@ Example release gates (set thresholds from product requirements and a validated 
 ### Self-improving loop
 
 `Log traces → Sample and evaluate → Inspect failures → Label new examples → Expand golden dataset → Improve retrieval/prompt/model/tools → Run regression tests → Deploy safely → Monitor again`
+
+```mermaid
+flowchart LR
+    A[Log traces] --> B[Sample and evaluate] --> C[Inspect failures] --> D[Label examples]
+    D --> E[Expand golden set] --> F[Improve system] --> G[Regression tests] --> H[Deploy] --> A
+```
 
 The loop should preserve privacy: redact or minimize sensitive data, respect retention policies, and control who can access evaluation traces.
 

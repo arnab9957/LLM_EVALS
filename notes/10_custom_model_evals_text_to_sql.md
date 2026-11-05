@@ -6,6 +6,14 @@
 
 A model can rank highly overall and still fail on your schema, SQL dialect, query complexity, latency target, or budget. Custom evals provide an apples-to-apples test using the same task, prompt, dataset, and scoring rules for every candidate.
 
+```mermaid
+flowchart LR
+    R[Requirements] --> L[Leaderboards: shortlist]
+    L --> C[Cost and latency estimate]
+    C --> E[Custom eval on your data]
+    E --> P[Pick model]
+```
+
 **Selection pipeline:**
 
 1. Define requirements and hard limits.
@@ -131,6 +139,18 @@ Model C is most accurate, Model B is fastest/cheapest, and Model A is a middle g
 ---
 
 ## 5. Text-to-SQL Custom Evaluation: Full Workflow
+
+```mermaid
+flowchart TB
+    A[Find and filter dataset] --> B[Extract schema]
+    B --> C[Build golden dataset<br/>question, gold_sql, gold_result]
+    C --> D[Validate gold SQL]
+    D --> E[Smoke test one request]
+    E --> F[Run all candidate models]
+    F --> G[Execute generated SQL]
+    G --> H{Result matches gold?}
+    H --> I[Accuracy + cost + latency report]
+```
 
 ### Step 1 — Find and filter the dataset
 

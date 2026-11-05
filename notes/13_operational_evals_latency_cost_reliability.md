@@ -6,6 +6,20 @@
 
 Operational evaluations measure how efficiently and reliably an AI application runs.
 
+```mermaid
+mindmap
+  root((Operational evals))
+    Latency
+      P50 / P95 / P99
+      TTFT
+    Cost
+      Tokens in and out
+      Cost per success
+    Reliability
+      Error rate
+      Timeouts and retries
+```
+
 | Quality Evaluations | Operational Evaluations |
 |---|---|
 | Is the answer correct and useful? | Is it fast, affordable, and reliable? |
@@ -46,6 +60,16 @@ For a RAG app, measure:
 - LLM generation.
 - Post-processing and network overhead.
 - End-to-end response time.
+
+```mermaid
+flowchart LR
+    Q[Query + embed] --> V[Vector DB] --> R[Rerank] --> L[LLM generation] --> P[Post-process]
+    Q -. t1 .-> T[End-to-end latency = sum]
+    V -. t2 .-> T
+    R -. t3 .-> T
+    L -. t4 .-> T
+    P -. t5 .-> T
+```
 
 ### Time to First Token (TTFT)
 

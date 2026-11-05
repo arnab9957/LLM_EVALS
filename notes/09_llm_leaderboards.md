@@ -10,6 +10,19 @@ A leaderboard score belongs to a particular **model version + benchmark + prompt
 
 ## 2. Four Common Types of LLM Leaderboards
 
+```mermaid
+mindmap
+  root((Leaderboards))
+    Benchmark-based
+      MMLU-Pro, GPQA, HELM
+    Multimodal
+      MMMU, MathVista
+    Human preference
+      Chatbot Arena
+    Application / workflow
+      SWE-bench, agent benches
+```
+
 | Type | What it measures | Examples | Best used for | Main caution |
 |---|---|---|---|---|
 | **1. Benchmark-based** | Performance on standardized datasets and tasks, often with objectively scored answers | MMLU/MMLU-Pro, GPQA, GSM8K, IFEval; Hugging Face Open LLM Leaderboard; Stanford HELM | Broad knowledge, reasoning, instruction-following, and capability comparisons | A good benchmark score does not guarantee good real-world performance |
@@ -111,6 +124,14 @@ A model can answer well when given the correct context but fail because the retr
 ## 4. How Should an AI Engineer Read a Leaderboard?
 
 Use this order instead of immediately choosing rank #1.
+
+```mermaid
+flowchart LR
+    L[Leaderboard] --> S[Shortlist 3-5 models]
+    S --> C[Check setup, contamination, cost]
+    C --> E[Run your own custom evals]
+    E --> D[Decide on your data]
+```
 
 ### Step 1: Start with the task—not the ranking
 

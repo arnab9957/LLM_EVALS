@@ -4,6 +4,15 @@
 
 ## 1. Evaluation Levels
 
+```mermaid
+flowchart LR
+    Q[Question] --> R[Retriever] --> G[Generator] --> A[Answer]
+    R -. contextual precision / recall / relevancy .-> E1[Component evals]
+    G -. faithfulness / answer relevancy .-> E1
+    A -. RAG triad .-> E2[Pipeline evals]
+    A -. correctness, completeness, tone .-> E3[Application evals]
+```
+
 | Level | What is tested? | Main question | Example |
 |---|---|---|---|
 | **Component** | Retriever or generator in isolation | Which component is failing? | Did retrieval find useful chunks? |
@@ -142,6 +151,13 @@ Interpretation:
 
 An LLM judge can evaluate semantic properties that are hard to measure with exact string matching.
 
+```mermaid
+flowchart LR
+    A[Answer] --> X[Extract claims]
+    X --> V{Each claim supported<br/>by context?}
+    V --> S["Faithfulness = supported / total claims"]
+```
+
 A typical process:
 1. Extract claims from the generated answer.
 2. Check each claim against the supplied context or reference.
@@ -176,6 +192,15 @@ Test prompt injection, jailbreak attempts, PII leakage, unauthorized data access
 ## 9. Golden Dataset Creation
 
 A useful RAG golden example can include:
+
+```mermaid
+flowchart LR
+    H[Hand-authored goldens] --> M[Merge]
+    S[LLM-synthesized goldens] --> RV[Human review and dedupe] --> M
+    P[Production failures] --> M
+    M --> ST[Stable regression set]
+    M --> EX[Expanding set]
+```
 
 ```json
 {
