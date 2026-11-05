@@ -25,6 +25,12 @@ These notes are based on the **LLM Evals** course by **[CampusX](https://www.you
 | 13 | LLM Evals — Operational Evaluations | [13_operational_evals_latency_cost_reliability.md](notes/13_operational_evals_latency_cost_reliability.md) |
 | 14 | LLM Evals: Online Evaluations & Continuous Production Monitoring | [14_online_evals_production_monitoring.md](notes/14_online_evals_production_monitoring.md) |
 
+## Interview Preparation
+
+The interview questions are in a separate folder: [interview_questions/](interview_questions/)
+
+- [LLM Evals — Interview Questions (Beginner → Advanced)](interview_questions/15_interview_questions_beginner_to_advanced.md): 28 questions with answers and diagrams
+
 ## Learning path
 
 ```mermaid
