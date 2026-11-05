@@ -2,6 +2,12 @@
 
 Each topic lives in its own file under [notes/](notes/). Read them in order or jump to any topic.
 
+## Credits
+
+These notes are based on the **LLM Evals** course by **[CampusX](https://www.youtube.com/@campusx-official)**. A big thank you to CampusX for the excellent content!
+
+- Course playlist: <https://youtube.com/playlist?list=PLEneLIDJFpcA&si=0fbod9ua_-2Aufpa>
+
 | # | Topic | File |
 |---|---|---|
 | 01 | LLM Evaluations (LLM Evals) — Short Notes | [01_intro_why_llm_evals.md](notes/01_intro_why_llm_evals.md) |
